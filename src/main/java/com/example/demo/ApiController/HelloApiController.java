@@ -1,7 +1,6 @@
 package com.example.demo.ApiController;
 
 
-import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +33,7 @@ public class HelloApiController {
         return res;
     }
 
-    @GetMapping("/api/user/{userId}")
+    @GetMapping("/api/hi/user/{userId}")
     public Map<String, Object> user(
         @PathVariable(name = "userId", required = true) Integer userId
     ) {
