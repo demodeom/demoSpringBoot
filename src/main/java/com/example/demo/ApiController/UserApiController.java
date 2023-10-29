@@ -2,6 +2,7 @@ package com.example.demo.ApiController;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.BcryptPasswordUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class UserApiController {
             @RequestParam String userPassword
     )
     {
-        User user = new User(userNo, userName, userPassword);
+        String hashPassword = BcryptPasswordUtil.password_hash(userPassword);
+        User user = new User(userNo, userName, hashPassword);
         return userRepository.save(user);
     }
 
@@ -40,7 +42,8 @@ public class UserApiController {
 
         if (user != null) {
             user.setUserNo(userNo);
-            user.setUserPassword(userPassword);
+            String hashPassword = BcryptPasswordUtil.password_hash(userPassword);
+            user.setUserPassword(hashPassword);
             user.setUserName(userName);
             return userRepository.save(user);
         }
